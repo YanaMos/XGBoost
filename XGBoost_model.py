@@ -2,7 +2,7 @@ import xgboost as xgb
 from sklearn.model_selection import train_test_split
 
 
-class Xgboost_model:
+class XGBoost_model:
 
     def model(self, data, label, feature_name):
 
