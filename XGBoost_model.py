@@ -15,12 +15,12 @@ class XGBoost_model:
         print("Train dataset contains {0} rows and {1} columns".format(dtrain.num_row(), dtrain.num_col()))
         print("Test dataset contains {0} rows and {1} columns".format(dtest.num_row(), dtest.num_col()))
 
+        # 'scale_pos_weight' - for unbalanced dataset (calculated as negative / positive)
         params = {
             'objective': 'binary:logistic',
             'max_depth': 7,
             'max_delta_step': 1,
             'scale_pos_weight': 3
-
         }
 
         num_rounds = 70
@@ -33,7 +33,6 @@ class XGBoost_model:
      def predict(self, model, dtest):
 
         predict = model.predict(dtest, ntree_limit=model.best_ntree_limit)
-
         return predict
 
     def predict_info(self, model, predict, dtest):
