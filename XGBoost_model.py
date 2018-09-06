@@ -1,5 +1,6 @@
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 
 
 class XGBoost_model:
@@ -28,4 +29,23 @@ class XGBoost_model:
         model = xgb.train(params, dtrain, num_rounds, evals=evallist)
 
         return model
+
+     def predict(self, model, dtest):
+
+        predict = model.predict(dtest, ntree_limit=model.best_ntree_limit)
+
+        return predict
+
+    def predict_info(self, model, predict, dtest):
+
+        predicted_labels = predict > 0.5
+
+        print('Accuracy: {0:.2f}'.format(accuracy_score(dtest.get_label(), predicted_labels)))
+        print('Precision: {0:.2f}'.format(precision_score(dtest.get_label(), predicted_labels)))
+        print('Recall: {0:.2f}'.format(recall_score(dtest.get_label(), predicted_labels)))
+        print('F1: {0:.2f}'.format(f1_score(dtest.get_label(), predicted_labels)))
+
+        importances = model.get_fscore()
+        print(importances)
+
 
