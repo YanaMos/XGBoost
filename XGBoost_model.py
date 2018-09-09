@@ -28,9 +28,9 @@ class XGBoost_model:
 
         model = xgb.train(params, dtrain, num_rounds, evals=evallist)
 
-        return model
+        return model, dtest
 
-     def predict(self, model, dtest):
+    def predict(self, model, dtest):
 
         predict = model.predict(dtest, ntree_limit=model.best_ntree_limit)
         return predict
