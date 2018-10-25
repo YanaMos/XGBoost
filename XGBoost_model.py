@@ -25,7 +25,6 @@ class XGBoost_model:
 
         num_rounds = 70
         evallist = [(dtest, 'eval'), (dtrain, 'train')]
-
         model = xgb.train(params, dtrain, num_rounds, evals=evallist)
 
         return model, dtest
