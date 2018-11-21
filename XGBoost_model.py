@@ -20,10 +20,10 @@ class XGBoost_model:
             'objective': 'binary:logistic',
             'max_depth': 7,
             'max_delta_step': 1,
-            'scale_pos_weight': 3
+            'scale_pos_weight': 4
         }
 
-        num_rounds = 70
+        num_rounds = 130
         evallist = [(dtest, 'eval'), (dtrain, 'train')]
         model = xgb.train(params, dtrain, num_rounds, evals=evallist)
 
